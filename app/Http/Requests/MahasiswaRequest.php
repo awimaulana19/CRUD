@@ -25,10 +25,27 @@ class MahasiswaRequest extends FormRequest
     {
         return [
             'nama' => 'string|max:50',
-            'nim' => 'string|max:20',
+            'nim' => 'string|max:20|unique:mahasiswas',
             'kelas' => 'string|max:2',
             'alamat' => 'string|max:50',
             'semester' => 'integer|max:14',
+        ];
+    }
+
+    public function messages()
+    {
+        return[
+            'nama.string' => 'Nama harus bertipe string',
+            'nama.max' => 'Nama maximal 50 karakter',
+            'nim.string' => 'Nim harus bertipe string',
+            'nim.max' => 'Nim maximal 20 karakter',
+            'nim.unique' => 'Sudah ada NIM yang sama',
+            'kelas.string' => 'Kelas harus bertipe string',
+            'kelas.max' => 'Kelas maximal 2 karakter',
+            'alamat.string' => 'Alamat harus bertipe string',
+            'alamat.max' => 'Alamat maximal 50 karakter',
+            'semester.integer' => 'Semester harus bertipe integer',
+            'semester.max' => 'Semester maximal 14 angka',
         ];
     }
 

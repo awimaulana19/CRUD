@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Mahasiswa;
 use Illuminate\Http\Request;
 use App\Http\Requests\MahasiswaRequest;
+use App\Http\Requests\MahasiswaUpdateRequest;
 
 class MahasiswaController extends Controller
 {
@@ -28,15 +29,15 @@ class MahasiswaController extends Controller
         return redirect('/');
     }
 
-    public function update(MahasiswaRequest $request, $id)
+    public function update(MahasiswaUpdateRequest $request, $id)
     {
         $mahasiswa = Mahasiswa::where('id', $id)->first();
 
-        $mahasiswa->nama = $request->nama;
-        $mahasiswa->nim = $request->nim;
-        $mahasiswa->kelas = $request->kelas;
-        $mahasiswa->alamat = $request->alamat;
-        $mahasiswa->semester = $request->semester;
+        $mahasiswa->nama = $request->namaUpdate;
+        $mahasiswa->nim = $request->nimUpdate;
+        $mahasiswa->kelas = $request->kelasUpdate;
+        $mahasiswa->alamat = $request->alamatUpdate;
+        $mahasiswa->semester = $request->semesterUpdate;
         
         $mahasiswa->update();
 

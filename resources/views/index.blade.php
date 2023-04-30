@@ -276,16 +276,16 @@
                                 <td>{{ $item->alamat }}</td>
                                 <td>{{ $item->semester }}</td>
                                 <td>
-                                    <a href="{{ '#editData'.$item->id }}" class="edit" data-toggle="modal"><i
+                                    <a href="{{ '#editData' . $item->id }}" class="edit" data-toggle="modal"><i
                                             class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
-                                    <a href="{{ '#hapusData'.$item->id }}" class="delete" data-toggle="modal"><i
+                                    <a href="{{ '#hapusData' . $item->id }}" class="delete" data-toggle="modal"><i
                                             class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
                                 </td>
                             </tr>
-                            <div id="{{ 'editData'.$item->id }}" class="modal fade">
+                            <div id="{{ 'editData' . $item->id }}" class="modal fade">
                                 <div class="modal-dialog">
                                     <div class="modal-content">
-                                        <form action="{{ '/edit/'.$item->id }}" method="POST">
+                                        <form action="{{ '/edit/' . $item->id }}" method="POST">
                                             @csrf
                                             <div class="modal-header">
                                                 <h4 class="modal-title">Edit Data</h4>
@@ -295,23 +295,58 @@
                                             <div class="modal-body">
                                                 <div class="form-group">
                                                     <label>Nama</label>
-                                                    <input type="text" class="form-control" id="nama" name="nama" value="{{ $item->nama }}" required>
+                                                    <input type="text" class="form-control @error('namaUpdate') is-invalid @enderror" id="namaUpdate"
+                                                        name="namaUpdate" value="{{ $item->nama }}" required>
+                                                    @error('namaUpdate')
+                                                        <div class="invalid-feedback">
+                                                            <i class="bi bi-exclamation-circle-fill"></i>
+                                                            {{ $message }}
+                                                        </div>
+                                                    @enderror
                                                 </div>
                                                 <div class="form-group">
                                                     <label>NIM</label>
-                                                    <input type="text" class="form-control" id="nim" name="nim" value="{{ $item->nim }}" required>
+                                                    <input type="text" class="form-control @error('nimUpdate') is-invalid @enderror" id="nimUpdate"
+                                                        name="nimUpdate" value="{{ $item->nim }}" required>
+                                                    @error('nimUpdate')
+                                                        <div class="invalid-feedback">
+                                                            <i class="bi bi-exclamation-circle-fill"></i>
+                                                            {{ $message }}
+                                                        </div>
+                                                    @enderror
                                                 </div>
                                                 <div class="form-group">
                                                     <label>Kelas</label>
-                                                    <input type="text" class="form-control" id="kelas" name="kelas" value="{{ $item->kelas }}" required>
+                                                    <input type="text" class="form-control @error('kelasUpdate') is-invalid @enderror" id="kelasUpdate"
+                                                        name="kelasUpdate" value="{{ $item->kelas }}" required>
+                                                    @error('kelasUpdate')
+                                                        <div class="invalid-feedback">
+                                                            <i class="bi bi-exclamation-circle-fill"></i>
+                                                            {{ $message }}
+                                                        </div>
+                                                    @enderror
                                                 </div>
                                                 <div class="form-group">
                                                     <label>Alamat</label>
-                                                    <input type="text" class="form-control" id="alamat" name="alamat" value="{{ $item->alamat }}" required>
+                                                    <input type="text" class="form-control @error('alamatUpdate') is-invalid @enderror" id="alamatUpdate"
+                                                        name="alamatUpdate" value="{{ $item->alamat }}" required>
+                                                    @error('alamatUpdate')
+                                                        <div class="invalid-feedback">
+                                                            <i class="bi bi-exclamation-circle-fill"></i>
+                                                            {{ $message }}
+                                                        </div>
+                                                    @enderror
                                                 </div>
                                                 <div class="form-group">
                                                     <label>Semester</label>
-                                                    <input type="number" class="form-control" id="semester" name="semester" value="{{ $item->semester }}" required>
+                                                    <input type="number" class="form-control @error('semesterUpdate') is-invalid @enderror" id="semesterUpdate"
+                                                        name="semesterUpdate" value="{{ $item->semester }}" required>
+                                                    @error('semesterUpdate')
+                                                        <div class="invalid-feedback">
+                                                            <i class="bi bi-exclamation-circle-fill"></i>
+                                                            {{ $message }}
+                                                        </div>
+                                                    @enderror
                                                 </div>
                                             </div>
                                             <div class="modal-footer">
@@ -323,7 +358,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div id="{{ 'hapusData'.$item->id }}" class="modal fade">
+                            <div id="{{ 'hapusData' . $item->id }}" class="modal fade">
                                 <div class="modal-dialog">
                                     <div class="modal-content">
                                         <form>
@@ -334,12 +369,14 @@
                                             </div>
                                             <div class="modal-body">
                                                 <p>Apakah anda yakin ingin menghapus data ini?</p>
-                                                <p class="text-warning"><small>Data tidak bisa dipulihkan kembali.</small></p>
+                                                <p class="text-warning"><small>Data tidak bisa dipulihkan
+                                                        kembali.</small></p>
                                             </div>
                                             <div class="modal-footer">
                                                 <input type="button" class="btn btn-default" data-dismiss="modal"
                                                     value="Cancel">
-                                                <a href="{{ '/hapus/'.$item->id }}" class="btn btn-danger">Hapus</a>
+                                                <a href="{{ '/hapus/' . $item->id }}"
+                                                    class="btn btn-danger">Hapus</a>
                                             </div>
                                         </form>
                                     </div>
@@ -364,23 +401,58 @@
                     <div class="modal-body">
                         <div class="form-group">
                             <label>Nama</label>
-                            <input type="text" class="form-control" id="nama" name="nama" required>
+                            <input type="text" class="form-control @error('nama') is-invalid @enderror"
+                                id="nama" name="nama" required>
+                            @error('nama')
+                                <div class="invalid-feedback">
+                                    <i class="bi bi-exclamation-circle-fill"></i>
+                                    {{ $message }}
+                                </div>
+                            @enderror
                         </div>
                         <div class="form-group">
                             <label>NIM</label>
-                            <input type="text" class="form-control" id="nim" name="nim" required>
+                            <input type="text" class="form-control @error('nim') is-invalid @enderror"
+                                id="nim" name="nim" required>
+                            @error('nim')
+                                <div class="invalid-feedback">
+                                    <i class="bi bi-exclamation-circle-fill"></i>
+                                    {{ $message }}
+                                </div>
+                            @enderror
                         </div>
                         <div class="form-group">
                             <label>Kelas</label>
-                            <input type="text" class="form-control" id="kelas" name="kelas" required>
+                            <input type="text" class="form-control @error('kelas') is-invalid @enderror"
+                                id="kelas" name="kelas" required>
+                            @error('kelas')
+                                <div class="invalid-feedback">
+                                    <i class="bi bi-exclamation-circle-fill"></i>
+                                    {{ $message }}
+                                </div>
+                            @enderror
                         </div>
                         <div class="form-group">
                             <label>Alamat</label>
-                            <input type="text" class="form-control" id="alamat" name="alamat" required>
+                            <input type="text" class="form-control @error('alamat') is-invalid @enderror"
+                                id="alamat" name="alamat" required>
+                            @error('alamat')
+                                <div class="invalid-feedback">
+                                    <i class="bi bi-exclamation-circle-fill"></i>
+                                    {{ $message }}
+                                </div>
+                            @enderror
                         </div>
                         <div class="form-group">
                             <label>Semester</label>
-                            <input type="number" class="form-control" id="semester" name="semester" required>
+                            <input type="number" class="form-control @error('semester') is-invalid @enderror"
+                                id="semester" name="semester" required>
+                            @error('semester')
+                                <div class="invalid-feedback">
+                                    <i class="bi bi-exclamation-circle-fill"></i>
+                                    {{ $message }}
+                                </div>
+                            @enderror
                         </div>
                     </div>
                     <div class="modal-footer">
